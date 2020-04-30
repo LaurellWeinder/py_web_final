@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.db import IntegrityError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View, generic
 
@@ -21,6 +20,7 @@ class AuthorListView(generic.ListView):
     model = Author
     template_name = 'authors.html'
 
+
 class AuthorDetailView(View):
     def get(self, request, author_id):
         author = get_object_or_404(Author, author_id=author_id)
@@ -31,6 +31,7 @@ class AuthorDetailView(View):
         return render(request, 'author_detail.html', {'author': author,
                                                       'author_books': author_books,
                                                       })
+
 
 class AuthorCreateView(View):
     def get(self, request):
@@ -51,7 +52,6 @@ class AuthorCreateView(View):
         return render(request, 'author_create.html', {'author_form': author_form})
 
 
-
 class BookListView(generic.ListView):
     model = Book
     template_name = 'books.html'
@@ -68,6 +68,7 @@ class BookCreateView(View):
         book_form = BookForm()
         return render(request, 'book_create.html', context={'book_form': book_form,
                                                             })
+
     def post(self, request):
         book_form = BookForm(request.POST)
         if book_form.is_valid():

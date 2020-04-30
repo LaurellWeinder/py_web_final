@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Year</th>
+          <th scope="col">ISBN</th>
+          <th scope="col">Publisher</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr>
+          <th scope="row">{{ book.title }}</th>
+            <td>{{book.author}}</td>
+            <td>{{book.year}}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{book.publisher}}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

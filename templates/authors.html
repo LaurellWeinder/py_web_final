@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if object_list %}
+{% for author in object_list %}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Name Surname</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row"><a href="{{ author.get_absolute_url }}">{{ author.name }} {{ author.surname }}</a></th>
+
+    </tr>
+    </tbody>
+</table>
+{% endfor %}
+{% else %}
+<p>There are no authors in the library, sorry!</p>
+{% endif %}
+{% endblock content %}

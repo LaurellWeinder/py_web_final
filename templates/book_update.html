@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form class="form-control" action="{% url 'book_create' %}" method="post">
+    <form class="form-control" action="{% url 'book_update' book_id=book.book_id %}" method="post">
         {% csrf_token %}
 
         {% for field in book_form %}
@@ -17,6 +17,6 @@
             </li>
         {% endfor %}
 
-        <button type="submit" class="btn btn-outline-info">Create Book</button>
+        <button type="submit" class="btn btn-outline-info">Update Book</button>
     </form>
 {% endblock %}

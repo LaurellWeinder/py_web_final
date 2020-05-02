@@ -1,25 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if book_list %}
-
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Author</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for book in object_list %}
-    <tr>
-        <th scope="row"><a href="{{ book.get_absolute_url }}">{{book.title }}</a></th>
-        <th scope="row">{{book.author}}</th>
-         {% endfor %}
-    </tr>
-    </tbody>
-</table>
-
-{% else %}
-<p>No books in the library, sorry!</p>
-{% endif %}
+    {% if book_list %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in object_list %}
+                <tr>
+                <th scope="row"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a></th>
+                <th scope="row">{{ book.author }}</th>
+            {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+    {% else %}
+        <p>No books in the library, sorry!</p>
+    {% endif %}
+    {% include 'pagination.html' %}
 {% endblock content %}

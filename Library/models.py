@@ -7,6 +7,9 @@ class Author(models.Model):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
 
+    class Meta:
+        ordering = ['-author_id']
+
     def get_absolute_url(self):
         return reverse('author_detail', kwargs={'author_id': self.author_id})
 
@@ -21,6 +24,9 @@ class Book(models.Model):
     year = models.PositiveIntegerField()
     isbn = models.CharField(max_length=13)
     publisher = models.CharField(max_length=50)
+
+    class Meta:
+        ordering = ['-book_id']
 
     def get_absolute_url(self):
         return reverse('book_detail', kwargs={'book_id': self.book_id})

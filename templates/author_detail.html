@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
     <ul class="list-group"><strong>{{ author.name }} {{ author.surname }}</strong>
-    {% if author_books %}
-        {% for book in author_books %}
-        <ul class="list-group">
-            <li class="list-group-item" href="{{ book.get_absolute_url }}">{{ book.title }}</li>
-        </ul>
-        {% endfor %}
-    {% else %}
-        <li class="list-group-item">Sorry, no books of this author yet!</li>
-    </ul>
-    {% endif %}
+        {% if author_books %}
+            {% for book in author_books %}
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{{ book.get_absolute_url }}"> {{ book.title }} </a></li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <li class="list-group-item">Sorry, no books of this author yet!</li>
+            </ul>
+        {% endif %}
 {% endblock %}

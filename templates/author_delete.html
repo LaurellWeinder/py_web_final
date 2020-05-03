@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<form class="form-control" action="{% url 'author_delete' author_id=author.author_id %}" method="post">
+    {% csrf_token %}
+    <h3>Are you sure you want to delete {{ author.name }} {{ author.surname }}?</h3>
+    <button type="button"><a href="{% url 'author_detail' author_id=author.author_id %}">Cancel</a></button>
+    <button type="submit">Yes</button>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form class="form-control" action="{% url 'author_update' author_id=author.author_id %}" method="post">
+    {% csrf_token %}
+        {% for field in author_form %}
+
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+                </ul>
+            {% endif %}
+
+                <li class="list-group-item">{{ field.label|title }}
+                                            {{ field}}
+                </li>
+        {% endfor %}
+    <button type="submit" class="btn btn-outline-info">Update Author</button>
+    </form>
+{% endblock %}

@@ -1,9 +1,21 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<p>The library has the following record counts:</p>
-  <ul>
-    <li><strong>Books:</strong> {{ count_books }}</li>
-    <li><strong>Authors:</strong> {{ count_authors }}</li>
-  </ul>
+
+    <div class="alert alert-primary" role="alert">
+        <div class="container">
+            <h2 class="display-7">The library has the following record counts:</h2>
+            <ul>
+                <li><strong>Books:</strong> {{ count_books }}</li>
+                <li><strong>Authors:</strong> {{ count_authors }}</li>
+            </ul>
+            <p class="change-list">Some useful tips:</p>
+            <ul>
+                <li>To add a book in the library check if the author in the database and then add the book.</li>
+                <li>To delete a book, go to the description page (e.g. <code>library/books/1</code>), add <code>/delete</code> to the address line.</li>
+                <li>Be careful. If you delete the author, whose books are in the database, they will be deleted as well.</li>
+                <li>To change the book data, add <code>/update</code> to the address line, enter new info and then save it.</li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}

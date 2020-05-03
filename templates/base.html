@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
     <meta name='viewport' content='width=device-width,initial-scale=1'>
-
     <title>{% block title %}Library Catalogue{% endblock %}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -12,13 +11,13 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'index' %}">Library</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item">
+{#    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"#}
+{#            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+{#        <span class="navbar-toggler-icon"></span>#}
+{#    </button>#}
+    <div class="collapse navbar-collapse" id="navbarSuppotedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
                 <a class="nav-link" href="{% url 'books' %}">Books</a>
             </li>
             <li class="nav-item">
@@ -31,8 +30,13 @@
                 <a class="nav-link" href="{% url 'author_create' %}">Add Author</a>
             </li>
         </ul>
+        <form class="form-inline mr-sm-0" action="{% url 'search_results' %}">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
     </div>
 </nav>
+
 <div class="container-fluid">
     <div class="row">
         {% block content %}

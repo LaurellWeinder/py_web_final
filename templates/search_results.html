@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    {% if results %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Here's what we found:</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in results %}
+                <tr>
+                <th scope="row"><a href="{{ item.get_absolute_url }}">{{ item }}</a></th>
+            {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+        {% include 'pagination.html' %}
+    {% else %}
+        <p>Nothing is found, sorry!</p>
+    {% endif %}
+{% endblock content %}

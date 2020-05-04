@@ -1,11 +1,11 @@
 from django.db import models
 from django.urls import reverse
-
+from .validators import has_no_numbers, check_year
 
 class Author(models.Model):
     author_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    surname = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, validators=[has_no_numbers])
+    surname = models.CharField(max_length=50, validators=[has_no_numbers])
 
     class Meta:
         ordering = ['-author_id']
@@ -21,7 +21,7 @@ class Book(models.Model):
     book_id = models.AutoField(primary_key=True)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
-    year = models.PositiveIntegerField()
+    year = models.PositiveIntegerField(validators=[check_year])
     isbn = models.CharField(max_length=13)
     publisher = models.CharField(max_length=50)
 

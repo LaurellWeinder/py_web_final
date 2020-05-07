@@ -11,9 +11,9 @@ class BaseViewTestCaseMixin(object):
     def setUpTestData(cls):
         cls.view = None  # Check the correct view
         cls.url = None  # Check if url is correct
-        cls.url_name = None  # Check
+        cls.url_name = None  # Check the verbose url name
         cls.template_name = None
-        cls.context = None
+        cls.context = None # For views with context argument
 
     def test_status_code(self):
         response = self.client.get(self.url)

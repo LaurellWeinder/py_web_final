@@ -9,7 +9,7 @@ from .forms import *
 from .models import *
 
 
-class IndexPage(View):
+class IndexPageView(View):
     def get(self, request):
         count_books = Book.objects.all().count()
         count_authors = Author.objects.all().count()
@@ -41,7 +41,7 @@ class AuthorDetailView(View):
         if author:
             author_books = Book.objects.all().filter(author_id=author_id)
         else:
-            raise ValueError('No books of this author')
+            raise ValueError('Author does not exist')
         return render(request, 'author_detail.html', {'author': author,
                                                       'author_books': author_books,
                                                       })
@@ -66,6 +66,36 @@ class AuthorCreateView(View):
                 messages.error(request, 'This author already exists')
         return render(request, 'author_create.html', {'author_form': author_form,
                                                       })
+
+
+class AuthorUpdateView(View):
+    def get(self, request, author_id):
+        author = Author.objects.get(author_id__exact=author_id)
+        author_form = AuthorForm(instance=author)
+        return render(request, 'author_update.html', {'author_form': author_form,
+                                                      'author': author,
+                                                      })
+
+    def post(self, request, author_id):
+        author = Author.objects.get(author_id__exact=author_id)
+        author_form = AuthorForm(request.POST, instance=author)
+        if author_form.is_valid():
+            new_author = author_form.save()
+            return redirect(new_author)
+        return render(request, 'author_update.html', {'author_form': author_form,
+                                                      'author': author,
+                                                      })
+
+
+class AuthorDeleteView(View):
+    def get(self, request, author_id):
+        author = Author.objects.get(author_id__exact=author_id)
+        return render(request, 'author_delete.html', {'author': author})
+
+    def post(self, request, author_id):
+        author = Author.objects.get(author_id__exact=author_id)
+        author.delete()
+        return redirect(reverse('authors'))
 
 
 class BookListView(generic.ListView):
@@ -105,7 +135,7 @@ class BookUpdateView(View):
         book = Book.objects.get(book_id__exact=book_id)
         book_form = BookForm(instance=book)
         return render(request, 'book_update.html', {'book_form': book_form,
-                                                    'book': book_form,
+                                                    'book': book,
                                                     })
 
     def post(self, request, book_id):
@@ -115,35 +145,16 @@ class BookUpdateView(View):
             new_book = book_form.save()
             return redirect(new_book)
         return render(request, 'book_update.html', {'book_form': book_form,
-                                                    'book': book_form,
+                                                    'book': book,
                                                     })
 
 
-class AuthorUpdateView(View):
-    def get(self, request, author_id):
-        author = Author.objects.get(author_id__exact=author_id)
-        author_form = AuthorForm(instance=author)
-        return render(request, 'author_update.html', {'author_form': author_form,
-                                                      'author': author,
-                                                      })
+class BookDeleteView(View):
+    def get(self, request, book_id):
+        book = Book.objects.get(book_id__exact=book_id)
+        return render(request, 'book_delete.html', {'book': book})
 
-    def post(self, request, author_id):
-        author = Author.objects.get(author_id__exact=author_id)
-        author_form = AuthorForm(request.POST, instance=author)
-        if author_form.is_valid():
-            new_author = author_form.save()
-            return redirect(new_author)
-        return render(request, 'author_update.html', {'author_form': author_form,
-                                                      'author': author,
-                                                      })
-
-
-class AuthorDeleteView(View):
-    def get(self, request, author_id):
-        author = Author.objects.get(author_id__exact=author_id)
-        return render(request, 'author_delete.html', {'author': author})
-
-    def post(self, request, author_id):
-        author = Author.objects.get(author_id__exact=author_id)
-        author.delete()
-        return redirect(reverse('authors'))
+    def post(self, request, book_id):
+        book = Book.objects.get(book_id__exact=book_id)
+        book.delete()
+        return redirect(reverse('books'))

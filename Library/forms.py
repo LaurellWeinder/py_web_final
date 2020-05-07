@@ -10,9 +10,11 @@ class BookForm(forms.ModelForm):
         widgets = {'title': forms.TextInput(attrs={'class': 'form-control'}),
                    'author': forms.Select(attrs={'class': 'form-control'}),
                    'isbn': forms.TextInput(attrs={'class': 'form-control'}),
-                   'year': forms.NumberInput({'class': 'form-control'}),
+                   'year': forms.NumberInput(attrs={'class': 'form-control'}),
                    'publisher': forms.TextInput(attrs={'class': 'form-control'}),
                    }
+
+
 
 
 class AuthorForm(forms.ModelForm):
